@@ -14,7 +14,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 func showSnippet(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Отображение заметки"))
+	w.Write([]byte("Отображение заметки..."))
 }
 
 func createSnippet(w http.ResponseWriter, r *http.Request) {
