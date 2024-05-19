@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-var ErrRecord = errors.New("models: подходящей записи не найдено")
+var ErrNoRecord = errors.New("models: подходящей записи не найдено")
 
 type Snippet struct {
 	ID      int
