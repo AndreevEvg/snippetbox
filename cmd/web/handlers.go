@@ -21,6 +21,13 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	/*
+		// Используем помощника render() для отображения шаблона.
+		app.render(w, r, "home.page.tmpl", &templateData{
+			Snippets: s,
+		})
+	*/
+
 	data := &templateData{Snippets: s}
 
 	files := []string{
@@ -37,7 +44,6 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	if err = ts.Execute(w, data); err != nil {
 		app.serverError(w, err)
 	}
-
 }
 
 func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
