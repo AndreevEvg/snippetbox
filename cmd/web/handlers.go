@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"html/template"
 	"net/http"
 	"snippetbox/pkg/models"
 	"strconv"
@@ -15,20 +14,32 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	files := []string{
-		"./ui/html/home.page.html",
-		"./ui/html/base.layout.html",
-		"./ui/html/footer.partial.html",
-	}
-
-	ts, err := template.ParseFiles(files...)
+	s, err := app.snippet.Latest()
 	if err != nil {
 		app.serverError(w, err)
 		return
 	}
-	if err = ts.Execute(w, nil); err != nil {
-		app.serverError(w, err)
+	for _, snippet := range s {
+		fmt.Fprintf(w, "%v\n", snippet)
 	}
+
+	/*
+		files := []string{
+			"./ui/html/home.page.html",
+			"./ui/html/base.layout.html",
+			"./ui/html/footer.partial.html",
+		}
+
+		ts, err := template.ParseFiles(files...)
+		if err != nil {
+			app.serverError(w, err)
+			return
+		}
+		if err = ts.Execute(w, nil); err != nil {
+			app.serverError(w, err)
+		}
+
+	*/
 
 }
 
